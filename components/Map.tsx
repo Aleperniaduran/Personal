@@ -31,10 +31,10 @@ const CITIES: City[] = [
     { name: 'Ciudad de México', coordinates: [-99.1332, 19.4326] },
     { name: 'Lima', coordinates: [-77.0428, -12.0464] },
     { name: 'Montevideo', coordinates: [-56.1645, -34.9011] },
-    { name: 'Santiago de Chile', coordinates: [-70.6693, -33.4489] }
+    { name: 'Santiago de Chile', coordinates: [-70.6693, -33.4489] },
+    { name: 'Buenos Aires', coordinates: [-58.3816, -34.6037] } // EZE
 ];
 
-// Connection interface
 // Connection interface
 type Connection = {
     from: City;
@@ -51,22 +51,29 @@ const getSimulatedLatency = (cityA: string, cityB: string): number => {
         'Ciudad de México-Lima': 136,
         'Lima-Ciudad de México': 137,
 
-        'Ciudad de México-Santiago de Chile': 159,
-        'Santiago de Chile-Ciudad de México': 162,
+        'Ciudad de México-Santiago de Chile': 161,
+        'Santiago de Chile-Ciudad de México': 160,
 
-        'Ciudad de México-Montevideo': 195,
-        'Montevideo-Ciudad de México': 193,
+        'Ciudad de México-Buenos Aires': 179,
+        'Buenos Aires-Ciudad de México': 194,
 
         // Lima connections
-        'Lima-Santiago de Chile': 32,
-        'Santiago de Chile-Lima': 31,
-
         'Lima-Montevideo': 61,
         'Montevideo-Lima': 61,
+
+        'Lima-Buenos Aires': 77,
+        'Buenos Aires-Lima': 78,
 
         // Santiago connections
         'Santiago de Chile-Montevideo': 30,
         'Montevideo-Santiago de Chile': 30,
+
+        'Santiago de Chile-Buenos Aires': 22,
+        'Buenos Aires-Santiago de Chile': 22,
+
+        // Montevideo connections
+        'Montevideo-Buenos Aires': 10,
+        'Buenos Aires-Montevideo': 10,
     };
     return latencies[key] || Math.floor(Math.random() * 200) + 10;
 };
