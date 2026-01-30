@@ -301,7 +301,7 @@ export default function Map() {
                         {/* Direct Route Details */}
                         <div className="mb-3 border-b border-gray-700 pb-2">
                             <div className="flex justify-between items-center mb-1">
-                                <span className="text-xs text-gray-400">Ruta Directa:</span>
+                                <span className="text-xs text-gray-400">Ruta Seleccionada:</span>
                                 <span className={`font-bold ${connections[0].latency > 150 ? 'text-red-400' : 'text-green-400'}`}>
                                     {connections[0].latency}ms
                                 </span>
@@ -365,10 +365,10 @@ export default function Map() {
                                             <div className="bg-green-950/40 p-3 rounded border border-green-500/30">
                                                 <div className="flex items-center gap-2 mb-1">
                                                     <span className="text-lg">✅</span>
-                                                    <span className="text-sm font-bold text-green-200">La ruta directa es la mejor</span>
+                                                    <span className="text-sm font-bold text-green-200">La ruta seleccionada es la mas optima</span>
                                                 </div>
                                                 <div className="text-xs text-gray-400">
-                                                    La red existente ({optimizedRoute.cost}ms) es más lenta que tu conexión directa.
+                                                    La red existente ({optimizedRoute.cost}ms) es más lenta que tu conexión seleccionada.
                                                 </div>
                                             </div>
 
