@@ -32,7 +32,9 @@ const CITIES: City[] = [
     { name: 'Lima', coordinates: [-77.0428, -12.0464] },
     { name: 'Montevideo', coordinates: [-56.1645, -34.9011] },
     { name: 'Santiago de Chile', coordinates: [-70.6693, -33.4489] },
-    { name: 'Buenos Aires', coordinates: [-58.3816, -34.6037] } // EZE
+    { name: 'Buenos Aires', coordinates: [-58.3816, -34.6037] },
+    { name: 'Bogotá', coordinates: [-74.0721, 4.7110] },
+    { name: 'Rio de Janeiro', coordinates: [-43.1729, -22.9068] }
 ];
 
 // Connection interface
@@ -48,31 +50,51 @@ const GRAPH: Record<string, Record<string, number>> = {
     'Ciudad de México': {
         'Lima': 136,
         'Santiago de Chile': 161,
-        'Buenos Aires': 179
+        'Buenos Aires': 179,
+        'Bogotá': 45,
+        'Rio de Janeiro': 180
     },
     'Lima': {
         'Ciudad de México': 137,
         'Santiago de Chile': 32,
         'Montevideo': 61,
-        'Buenos Aires': 77
+        'Buenos Aires': 77,
+        'Bogotá': 35,
+        'Rio de Janeiro': 85
     },
     'Santiago de Chile': {
         'Ciudad de México': 160,
         'Lima': 31,
         'Buenos Aires': 22,
-        'Montevideo': 30
+        'Montevideo': 30,
+        'Bogotá': 85
     },
     'Buenos Aires': {
         'Ciudad de México': 194,
         'Lima': 78,
         'Santiago de Chile': 22,
-        'Montevideo': 10
+        'Montevideo': 10,
+        'Bogotá': 190,
+        'Rio de Janeiro': 40
     },
     'Montevideo': {
         'Ciudad de México': 193,
         'Lima': 61,
         'Santiago de Chile': 30,
-        'Buenos Aires': 10
+        'Buenos Aires': 10,
+        'Rio de Janeiro': 35
+    },
+    'Bogotá': {
+        'Ciudad de México': 45,
+        'Lima': 35,
+        'Santiago de Chile': 85,
+        'Buenos Aires': 190
+    },
+    'Rio de Janeiro': {
+        'Buenos Aires': 40,
+        'Montevideo': 35,
+        'Lima': 85,
+        'Ciudad de México': 180
     }
 };
 
