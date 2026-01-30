@@ -55,46 +55,46 @@ const GRAPH: Record<string, Record<string, number>> = {
         'Rio de Janeiro': 180
     },
     'Lima': {
-        'Ciudad de México': 137,
+        'Ciudad de México': 137, // Asymmetric (+1)
         'Santiago de Chile': 32,
         'Montevideo': 61,
         'Buenos Aires': 77,
-        'Bogotá': 35,
-        'Rio de Janeiro': 85
+        'Bogotá': 34, // Asymmetric (-1)
+        'Rio de Janeiro': 89
     },
     'Santiago de Chile': {
-        'Ciudad de México': 160,
+        'Ciudad de México': 160, // Asymmetric (-1)
         'Lima': 31,
         'Buenos Aires': 22,
         'Montevideo': 30,
-        'Bogotá': 85
+        'Bogotá': 88
     },
     'Buenos Aires': {
-        'Ciudad de México': 194,
+        'Ciudad de México': 180, // Asymmetric (+1)
         'Lima': 78,
-        'Santiago de Chile': 22,
+        'Santiago de Chile': 31, // Asymmetric (+9 vs SCL->EZE 22)
         'Montevideo': 10,
-        'Bogotá': 190,
-        'Rio de Janeiro': 40
+        'Bogotá': 185,
+        'Rio de Janeiro': 42
     },
     'Montevideo': {
         'Ciudad de México': 193,
         'Lima': 61,
         'Santiago de Chile': 30,
         'Buenos Aires': 10,
-        'Rio de Janeiro': 35
+        'Rio de Janeiro': 33
     },
     'Bogotá': {
-        'Ciudad de México': 45,
+        'Ciudad de México': 48, // Asymmetric (+3)
         'Lima': 35,
         'Santiago de Chile': 85,
-        'Buenos Aires': 190
+        'Buenos Aires': 190,
     },
     'Rio de Janeiro': {
         'Buenos Aires': 40,
         'Montevideo': 35,
         'Lima': 85,
-        'Ciudad de México': 180
+        'Ciudad de México': 175
     }
 };
 
