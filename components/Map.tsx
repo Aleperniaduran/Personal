@@ -324,34 +324,66 @@ export default function Map() {
                                 <span>⚡ Optimizar Ruta (Dijkstra)</span>
                             </button>
                         ) : (
-                            <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
-                                <div className="flex justify-between items-center bg-cyan-900/30 p-2 rounded border border-cyan-500/30">
-                                    <span className="text-xs text-cyan-400">Ruta Óptima:</span>
-                                    <span className="font-bold text-cyan-300 text-lg">
-                                        {optimizedRoute.cost}ms
-                                    </span>
-                                </div>
+                            <div className="space-y-3 animate-in fade-in slide-in-from-top-2">
+                                {/* Logic to determine which is better */}
+                                {(() => {
+                                    const isBetter = optimizedRoute.cost < connections[0].latency;
+                                    const diff = Math.abs(connections[0].latency - optimizedRoute.cost);
 
-                                <div className="text-xs text-gray-400 font-mono border-l-2 border-cyan-500 pl-2">
-                                    {optimizedRoute.path.map((city, i) => (
-                                        <div key={city}>
-                                            {i > 0 && <div className="h-2 w-px bg-gray-600 ml-1 my-0.5"></div>}
-                                            <span className={city === connections[0].from.name || city === connections[0].to.name ? 'text-white font-bold' : 'text-cyan-200'}>
-                                                {city}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
+                                    return isBetter ? (
+                                        // Case A: Optimization Found (Dijkstra is faster)
+                                        <>
+                                            <div className="flex justify-between items-center bg-cyan-950/50 p-3 rounded border border-cyan-500/50 shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                                                <div>
+                                                    <div className="text-xs text-cyan-400 font-bold uppercase tracking-wider mb-1">Nueva Ruta Óptima</div>
+                                                    <span className="font-bold text-3xl text-cyan-300">
+                                                        {optimizedRoute.cost}ms
+                                                    </span>
+                                                </div>
+                                                <div className="text-right">
+                                                    <div className="text-xs text-green-400 font-bold bg-green-900/40 px-2 py-1 rounded inline-block mb-1">
+                                                        -{diff}ms
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                {optimizedRoute.cost < connections[0].latency ? (
-                                    <div className="text-center text-xs text-green-400 font-bold bg-green-900/20 p-1 rounded">
-                                        ¡Mejora de {connections[0].latency - optimizedRoute.cost}ms detectada!
-                                    </div>
-                                ) : (
-                                    <div className="text-center text-xs text-gray-400 p-1">
-                                        La ruta directa ya es la mejor opción.
-                                    </div>
-                                )}
+                                            {/* Path Visualization */}
+                                            <div className="text-xs text-gray-400 font-mono border-l-2 border-cyan-500 pl-3 py-1 ml-1 space-y-1">
+                                                {optimizedRoute.path.map((city, i) => (
+                                                    <div key={city} className="flex items-center gap-2">
+                                                        <div className={`w-1.5 h-1.5 rounded-full ${city === connections[0].from.name || city === connections[0].to.name ? 'bg-white' : 'bg-cyan-600'}`}></div>
+                                                        <span className={city === connections[0].from.name || city === connections[0].to.name ? 'text-white font-bold' : 'text-cyan-200'}>
+                                                            {city}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </>
+                                    ) : (
+                                        // Case B: Direct is Better (No optimization needed)
+                                        <>
+                                            <div className="bg-green-950/40 p-3 rounded border border-green-500/30">
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <span className="text-lg">✅</span>
+                                                    <span className="text-sm font-bold text-green-200">La ruta directa es la mejor</span>
+                                                </div>
+                                                <div className="text-xs text-gray-400">
+                                                    La red existente ({optimizedRoute.cost}ms) es más lenta que tu conexión directa.
+                                                </div>
+                                            </div>
+
+                                            {/* Alternative Path (Grayed out) */}
+                                            <div className="mt-2 pt-2 border-t border-gray-700/50">
+                                                <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-2">Camino Alternativo por Red</div>
+                                                <div className="text-xs text-gray-500 font-mono pl-2 border-l border-gray-700 space-y-1">
+                                                    {optimizedRoute.path.map((city) => (
+                                                        <div key={city} className="truncate">{city}</div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </>
+                                    );
+                                })()}
 
                                 <button
                                     onClick={(e) => {
@@ -359,9 +391,9 @@ export default function Map() {
                                         setConnections([]);
                                         setOptimizedRoute(null);
                                     }}
-                                    className="w-full mt-2 bg-gray-700 hover:bg-gray-600 text-xs text-white py-1 rounded"
+                                    className="w-full mt-2 bg-gray-700 hover:bg-gray-600 text-xs text-white py-2 rounded transition-colors font-medium"
                                 >
-                                    Limpiar
+                                    Limpiar Mapa
                                 </button>
                             </div>
                         )}
