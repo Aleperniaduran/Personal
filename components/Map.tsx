@@ -289,22 +289,28 @@ export default function Map() {
 
             {/* Helper overlay UI */}
             <div className="absolute top-4 left-4 bg-gray-900/90 backdrop-blur text-white p-4 rounded-lg border border-gray-600 max-w-xs z-10 select-none pointer-events-none">
-                <h3 className="font-bold text-lg mb-2">Monitor de Ruteo</h3>
-
                 <p className="text-sm text-gray-300 mb-2">
                     {!selectedCity && connections.length === 0
-                        ? "Haz clic en dos ciudades para medir latencia."
+                        ? ""
                         : selectedCity ? `Conectar ${selectedCity.name} con...` : "Análisis de ruta activo."}
                 </p>
 
                 {/* Analysis UI */}
                 {connections.length > 0 && (
                     <div className="bg-gray-800/50 p-3 rounded pointer-events-auto">
-                        <div className="flex justify-between items-center mb-2">
-                            <span className="text-xs text-gray-400">Ruta Directa:</span>
-                            <span className={`font-bold ${connections[0].latency > 150 ? 'text-red-400' : 'text-green-400'}`}>
-                                {connections[0].latency}ms
-                            </span>
+                        {/* Direct Route Details */}
+                        <div className="mb-3 border-b border-gray-700 pb-2">
+                            <div className="flex justify-between items-center mb-1">
+                                <span className="text-xs text-gray-400">Ruta Directa:</span>
+                                <span className={`font-bold ${connections[0].latency > 150 ? 'text-red-400' : 'text-green-400'}`}>
+                                    {connections[0].latency}ms
+                                </span>
+                            </div>
+                            <div className="text-xs text-gray-500 font-mono pl-2 border-l-2 border-gray-600">
+                                <div>{connections[0].from.name}</div>
+                                <div className="h-2 w-px bg-gray-700 ml-1 my-0.5"></div>
+                                <div>{connections[0].to.name}</div>
+                            </div>
                         </div>
 
                         {!optimizedRoute ? (
